@@ -17,7 +17,6 @@ $(document).ready(function() {
     }
     function update(e) {
     	var stack = $("#" + (e.toElement.id));
-		console.log($(".stack:last-child")[0]);
 		if(stack[0].className == "stack") {
 			if(collision($(stack),$("#t1"))) {
 				// if(stack[0].id == "d2" && $("#t1.stack:last-child") );
@@ -35,8 +34,7 @@ $(document).ready(function() {
 			else {
 				console.log("ERROR: For some reason the if statements are not being triggered. LINE 44 in app.js");
 			}
-			//increment score
-			// $("#moves").html((parseInt($("#moves").html())) + 1);
+			$("#moves").html((parseInt($("#moves").html())) + 1);
 		}
     }
 	$(".stack").on("mousedown", function() { 
@@ -46,7 +44,7 @@ $(document).ready(function() {
 			stack.css("top", ((e.clientY + document.body.scrollTop - document.body.clientTop - 30) + "px"));
 			stack.css("left", ((e.clientX + document.body.scrollLeft - document.body.clientLeft - 60) + "px"));
 		})
-		$(document).on("mouseup", function(e) {
+		$(document).one("mouseup", function(e) {
 			$(".stack").unbind("mousemove");
 			update(e);
 		})
