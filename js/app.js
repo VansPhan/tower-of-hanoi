@@ -15,38 +15,40 @@ $(document).ready(function() {
 		if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
 		return true;
     }
+    function update(e) {
+    	var stack = $("#" + (e.toElement.id));
+		console.log($(".stack:last-child")[0]);
+		if(stack[0].className == "stack") {
+			if(collision($(stack),$("#t1"))) {
+				// if(stack[0].id == "d2" && $("#t1.stack:last-child") );
+				stack.css("position", "");
+				$("#t1").append(stack);
+			}
+			else if(collision($(stack),$("#t2"))) {
+				stack.css("position", "");
+				$("#t2").append(stack);
+			}
+			else if(collision($(stack),$("#t3"))) {
+				stack.css("position", "");
+				$("#t3").append(stack);
+			}
+			else {
+				console.log("ERROR: For some reason the if statements are not being triggered. LINE 44 in app.js");
+			}
+			//increment score
+			// $("#moves").html((parseInt($("#moves").html())) + 1);
+		}
+    }
 	$(".stack").on("mousedown", function() { 
 		$(this).bind("mousemove" , function(e) {
 			var stack = $("#" + (e.toElement.id));
 			stack.css("position", "absolute");
 			stack.css("top", ((e.clientY + document.body.scrollTop - document.body.clientTop - 30) + "px"));
-			stack.css("left", ((e.clientX + document.body.scrollLeft - document.body.clientLeft - 70) + "px"));
+			stack.css("left", ((e.clientX + document.body.scrollLeft - document.body.clientLeft - 60) + "px"));
 		})
 		$(document).on("mouseup", function(e) {
 			$(".stack").unbind("mousemove");
-			var stack = $("#" + (e.toElement.id));
-			if(stack[0].className == "stack") {
-				if(collision($(stack),$("#t1"))) {
-					stack.css("position", "");
-					$("#t1").append(stack);
-				}
-				else if(collision($(stack),$("#t2"))) {
-					stack.css("position", "");
-					$("#t2").append(stack);
-					console.log("2");
-				}
-				else if(collision($(stack),$("#t3"))) {
-					stack.css("position", "");
-					$("#t3").append(stack);
-					console.log("3");
-				}
-				else {
-					console.log("ERROR: For some reason the if statements are not being triggered. LINE 44 in app.js");
-				}
-			}
+			update(e);
 		})
 	})
-	function reset() {
-		//Will be adding a reset state of the game
-	}
 })
